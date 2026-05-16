@@ -16,30 +16,31 @@
 
 가장 최신 빌드는 [Releases](../../releases) 페이지에서 받을 수 있습니다.
 
-| 플랫폼 | 파일 |
-|---|---|
-| macOS (Apple Silicon · M1/M2/M3/M4) | `AssistFinder_*_aarch64.dmg` |
-| macOS (Intel) | `AssistFinder_*_x64.dmg` |
-| Windows 10/11 (64-bit) | `AssistFinder_*_x64_en-US.msi` |
+| 플랫폼 | 파일 | 비고 |
+|---|---|---|
+| macOS (Apple Silicon + Intel) | `AssistFinder_*_universal.dmg` | Universal Binary 단일 파일로 두 칩셋 모두 지원 |
+| Windows 10/11 (64-bit) | `AssistFinder_*_x64_en-US.msi` | |
 
-> 어느 파일을 받아야 하는지 모르시면: macOS는 메뉴 →  → "이 Mac에 관하여"에서 칩 정보 확인. Apple M-시리즈면 `aarch64`, Intel이면 `x64`.
+> 다운로드 페이지 하단의 **`Source code (zip)` / `Source code (tar.gz)`** 는 GitHub이 자동 첨부하는 README 아카이브입니다 (실제 앱 소스 아님). **무시하셔도 됩니다.**
 
 ---
 
 ## 💻 시스템 요구사항 (Requirements)
 
-- **macOS**: 12.0 Monterey 이상
+- **macOS**: 12.0 Monterey 이상 (Apple Silicon · Intel 모두)
 - **Windows**: 10 이상 (64-bit)
 - **메모리**: 권장 4 GB 이상
 - **인터넷 연결**: AWS S3 통신용
 
 ---
 
-## ⚠️ 첫 실행 시 보안 경고 안내
+## ⚠️ 첫 실행 시 보안 경고 안내 (베타)
 
-현재 베타 빌드는 **코드사이닝 전 단계**입니다 (정식 출시 시점에 해제 예정). 처음 실행할 때 OS의 보안 경고가 표시될 수 있습니다.
+현재 빌드는 **코드사이닝 전 단계**입니다 (정식 출시 시점에 해제 예정). 처음 실행할 때 OS의 보안 경고가 표시됩니다.
 
-### macOS — "확인되지 않은 개발자" 경고
+### macOS — "확인되지 않은 개발자" + 키체인 비밀번호 반복 prompt
+
+**(1) 설치 경고 회피**
 
 **방법 A (GUI, 권장)**
 1. 다운받은 `.dmg`를 열고 앱을 `/Applications`로 드래그
@@ -51,13 +52,17 @@
 xattr -cr /Applications/AssistFinder.app
 ```
 
+**(2) 키체인 비밀번호 반복 prompt 줄이기**
+
+코드사이닝이 없는 베타 빌드는 macOS가 키체인 접근마다 사용자 동의를 요구합니다. 첫 prompt에서 **"항상 허용"** 을 클릭하시면 같은 빌드 동안에는 더 이상 묻지 않습니다. 정식 출시(Phase 2) 시점에 코드사이닝이 적용되면 이 동작은 사라집니다.
+
 ### Windows — "Windows에서 PC를 보호했습니다" 경고
 
 1. 다운받은 `.msi`를 더블클릭
 2. SmartScreen 경고가 나타나면 **"추가 정보"** 클릭
 3. **"실행"** 버튼이 나타나면 클릭
 
-> 이 경고는 향후 정식 인증서 적용 후 사라집니다.
+> 이 경고도 향후 정식 인증서 적용 후 사라집니다.
 
 ---
 
@@ -74,7 +79,21 @@ xattr -cr /Applications/AssistFinder.app
 
 - Secret Access Key는 OS 네이티브 키체인(macOS Keychain / Windows Credential Manager)에만 저장됩니다
 - 앱 내부 어디에도 평문으로 보관되지 않습니다
-- 외부 서버로 전송되지 않습니다 — 사용자의 AWS 계정에 직접 연결
+- 외부 서버로 전송되지 않습니다 — 사용자의 AWS 계정에 직접 연결됩니다
+
+### 데이터 보관 위치 (앱을 깨끗이 초기화하려면)
+
+앱 메타데이터(계정 목록 등)와 시크릿은 다음 위치에 저장됩니다:
+
+**macOS**
+- 메타데이터: `~/Library/Application Support/com.assist.assistfinder/`
+- 시크릿: Keychain Access.app → 검색 `com.assist.assistfinder`
+
+**Windows**
+- 메타데이터: `%APPDATA%\com.assist.assistfinder\`
+- 시크릿: 자격 증명 관리자(Credential Manager) → `com.assist.assistfinder`
+
+앱을 새로 깔아도 위 데이터는 **그대로 유지**됩니다 (업데이트 호환성). 처음부터 시작하시려면 위 항목을 모두 삭제 후 앱을 재실행하세요.
 
 ---
 
