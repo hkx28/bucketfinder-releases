@@ -1,7 +1,24 @@
+<div align="center">
+
+<img src="assets/bucketfinder_logo.png" width="120" alt="BucketFinder" />
+
 # BucketFinder
 
-**by AssistLabs — Mac과 Windows를 지원하는 무료 S3 클라이언트.**
-일반 Finder나 파일탐색기처럼 S3 버킷을 손쉽게 다룹니다.
+**by AssistLabs**
+
+클라우드 버킷 스토리지를 macOS Finder처럼 다루는 무료 크로스플랫폼 데스크톱 클라이언트
+
+[![Release](https://img.shields.io/badge/release-v0.2.0-6C4CF1)](../../releases)
+[![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Windows-black)](../../releases)
+[![License](https://img.shields.io/badge/binary-free-brightgreen)](#-라이선스-license)
+
+[다운로드](../../releases) · [지원](../../issues)
+
+</div>
+
+---
+
+**Mac과 Windows를 지원하는 무료 S3 클라이언트.** 일반 Finder나 파일탐색기처럼 S3 버킷을 손쉽게 다룹니다.
 
 핵심 특징:
 - 한국어 · 영어 · 일본어 네이티브 지원
