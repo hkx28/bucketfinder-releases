@@ -8,7 +8,7 @@
 
 클라우드 버킷 스토리지를 macOS Finder처럼 다루는 무료 크로스플랫폼 데스크톱 클라이언트
 
-[![Release](https://img.shields.io/badge/release-v0.2.0-6C4CF1)](../../releases)
+[![Release](https://img.shields.io/badge/release-v0.2.1-6C4CF1)](../../releases)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Windows-black)](../../releases)
 [![License](https://img.shields.io/badge/binary-free-brightgreen)](#-라이선스-license)
 
